@@ -1,11 +1,11 @@
 <script setup lang="ts">
-import { RouterView } from 'vue-router'
+import Dashboard from './sections/dashboard/Dashboard.vue'
+import { config } from './config'
+import { GitHubApiGitHubRepositoryRepository } from './infrastructure/GitHubApiGitHubRepositoryRepository'
+
+const repository = new GitHubApiGitHubRepositoryRepository(config.github_access_token)
 </script>
 
 <template>
-  <header>
-    <h1>Vue Best Practices</h1>
-  </header>
-
-  <RouterView />
+  <Dashboard :repository="repository" />
 </template>
