@@ -1,9 +1,10 @@
 {
   "extends": "./tsconfig.app.json",
+  "include": ["tests/**/*.ts", "src/**/*.vue", "src/**/*.ts"],
   "exclude": [],
   "compilerOptions": {
     "composite": true,
     "lib": [],
-    "types": ["node", "jsdom"]
+    "types": ["node", "jsdom", "@testing-library/jest-dom"]
   }
 }
