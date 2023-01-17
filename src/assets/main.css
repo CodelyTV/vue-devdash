@@ -1,3 +1,7 @@
+:root {
+  --header-height: 6.25rem;
+}
+
 body {
   margin: 0;
   font-family: sans-serif;
