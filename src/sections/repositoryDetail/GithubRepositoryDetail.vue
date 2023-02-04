@@ -52,29 +52,37 @@ const { repositoryData } = useGitHubRepository(props.repository, { organization:
     </table>
 
     <h3>Workflow runs status</h3>
-    <table :class="styles.detail__table">
-      <thead>
-        <tr>
-          <th>Name</th>
-          <th>Title</th>
-          <th>Date</th>
-          <th>Status</th>
-          <th>Conclusion</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="run in repositoryData.workflowRunsStatus" :key="run.id">
-          <td>{run.name}</td>
-          <td>
-            <a :href="run.url" target="_blank" rel="noreferrer">
-              {run.title}
-            </a>
-          </td>
-          <td>{{ run.createdAt.toLocaleDateString("es-ES") }}</td>
-          <td>{{ run.status }}</td>
-          <td>{{ run.conclusion }}</td>
-        </tr>
-      </tbody>
-    </table>
+    <template v-if="repositoryData.workflowRunsStatus">
+      <p>
+        ⏱️Last workflow run: {{ repositoryData.workflowRunsStatus[0].createdAt.toLocaleDateString("es-ES") }}
+      </p>
+      <table :class="styles.detail__table">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Title</th>
+            <th>Date</th>
+            <th>Status</th>
+            <th>Conclusion</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="run in repositoryData.workflowRunsStatus" :key="run.id">
+            <td>{run.name}</td>
+            <td>
+              <a :href="run.url" target="_blank" rel="noreferrer">
+                {run.title}
+              </a>
+            </td>
+            <td>{{ run.createdAt.toLocaleDateString("es-ES") }}</td>
+            <td>{{ run.status }}</td>
+            <td>{{ run.conclusion }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </template>
+    <div v-else>
+      <p>There are no workflow runs.</p>
+    </div>
   </section>
 </template>
