@@ -9,6 +9,7 @@ export default defineConfig({
 
   resolve: {
     alias: {
+      '~': fileURLToPath(new URL('./', import.meta.url)),
       '@': fileURLToPath(new URL('./src', import.meta.url)),
     },
   },
@@ -17,6 +18,7 @@ export default defineConfig({
     include: ['tests/**/*.test.ts'],
     environment: 'jsdom',
     setupFiles: 'tests/vitest.setup.ts',
+    mockReset: true,
     deps: {
       inline: ['@vue'],
     },
