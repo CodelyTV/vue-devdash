@@ -32,14 +32,12 @@ function isoToReadableDate(lastUpdateDate: Date): string {
   <article :class="styles.widget">
     <header :class="styles.widget__header">
       <h2 :class="styles.widget__title">
-        <a
-          :href="props.repository.url"
-          target="_blank"
+        <RouterLink
+          :to="{ name: 'repository', params: { organization: props.repository.id.organization, name: props.repository.id.name } }"
           :title="`${props.repository.id.organization}/${props.repository.id.name}`"
-          rel="noreferrer"
         >
           {{ props.repository.id.organization }}/{{ props.repository.id.name }}
-        </a>
+        </RouterLink>
       </h2>
       <Lock v-if="props.repository.private" />
       <Unlock v-else />
