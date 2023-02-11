@@ -1,13 +1,27 @@
 <script setup lang="ts">
+import { computed, ref } from 'vue'
+import { useElementVisibility } from '@vueuse/core'
 import Unlock from '../../assets/icons/unlock.svg?component'
 import Lock from '../../assets/icons/lock.svg?component'
 import { useGitHubRepository } from './useGitHubRepository'
 import styles from './GithubRepositoryDetail.module.css'
+import PullRequests from './PullRequests.vue'
 import type { GitHubRepositoryRepository } from '@/domain/GitHubRepositoryRepository'
+import type { GitHubApiGitHubRepositoryPullRequestRepository } from '@/infrastructure/GitHubApiGitHubRepositoryPullRequestRepository'
 
-const props = defineProps<{ repository: GitHubRepositoryRepository; organization: string; name: string }>()
+const props = defineProps<{
+  gitHubRepositoryRepository: GitHubRepositoryRepository
+  gitHubRepositoryPullRequestRepository: GitHubApiGitHubRepositoryPullRequestRepository
+  organization: string
+  name: string
+}>()
 
-const { repositoryData } = useGitHubRepository(props.repository, { organization: props.organization, name: props.name })
+const repositoryId = computed(() => ({ organization: props.organization, name: props.name }))
+
+const { repositoryData } = useGitHubRepository(props.gitHubRepositoryRepository, repositoryId.value)
+
+const pullRequestsRef = ref(null)
+const pullRequestsVisible = useElementVisibility(pullRequestsRef)
 </script>
 
 <template>
@@ -68,10 +82,10 @@ const { repositoryData } = useGitHubRepository(props.repository, { organization:
         </thead>
         <tbody>
           <tr v-for="run in repositoryData.workflowRunsStatus" :key="run.id">
-            <td>{run.name}</td>
+            <td>{{ run.name }}</td>
             <td>
               <a :href="run.url" target="_blank" rel="noreferrer">
-                {run.title}
+                {{ run.title }}
               </a>
             </td>
             <td>{{ run.createdAt.toLocaleDateString("es-ES") }}</td>
@@ -84,5 +98,9 @@ const { repositoryData } = useGitHubRepository(props.repository, { organization:
     <div v-else>
       <p>There are no workflow runs.</p>
     </div>
+
+    <section ref="pullRequestsRef">
+      <PullRequests v-if="pullRequestsVisible" :repository="gitHubRepositoryPullRequestRepository" :repository-id="repositoryId" />
+    </section>
   </section>
 </template>

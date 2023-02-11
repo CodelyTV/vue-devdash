@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import NProgress from 'nprogress'
+import { GitHubApiGitHubRepositoryPullRequestRepository } from '../infrastructure/GitHubApiGitHubRepositoryPullRequestRepository'
 import Layout from '@/sections/layout/Layout.vue'
 import Dashboard from '@/sections/dashboard/Dashboard.vue'
 import { config } from '@/config'
@@ -28,9 +29,11 @@ const router = createRouter({
           name: 'repository',
           component: () => import('@/sections/repositoryDetail/GithubRepositoryDetail.vue'),
           props: (route) => {
-            const repository = new GitHubApiGitHubRepositoryRepository(config.github_access_token)
+            const gitHubRepositoryRepository = new GitHubApiGitHubRepositoryRepository(config.github_access_token)
+            const gitHubRepositoryPullRequestRepository = new GitHubApiGitHubRepositoryPullRequestRepository(config.github_access_token)
             return {
-              repository,
+              gitHubRepositoryRepository,
+              gitHubRepositoryPullRequestRepository,
               organization: route.params.organization,
               name: route.params.name,
             }
