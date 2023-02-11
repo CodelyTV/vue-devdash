@@ -10,7 +10,7 @@
     align-items: center;
     justify-content: space-between;
     padding: 0.5rem;
-    background-color: #3cff64;
+    background-color: var(--color-brand);
   }
 
   &__status {
