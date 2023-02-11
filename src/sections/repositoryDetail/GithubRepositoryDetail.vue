@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue'
 import { useElementVisibility } from '@vueuse/core'
-import Unlock from '../../assets/icons/unlock.svg?component'
-import Lock from '../../assets/icons/lock.svg?component'
 import { useGitHubRepository } from './useGitHubRepository'
 import styles from './GithubRepositoryDetail.module.css'
 import PullRequests from './PullRequests.vue'
+import Lock from '@/assets/icons/lock.svg?component'
+import Unlock from '@/assets/icons/unlock.svg?component'
 import type { GitHubRepositoryRepository } from '@/domain/GitHubRepositoryRepository'
 import type { GitHubApiGitHubRepositoryPullRequestRepository } from '@/infrastructure/GitHubApiGitHubRepositoryPullRequestRepository'
 

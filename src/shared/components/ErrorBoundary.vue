@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { onErrorCaptured, ref } from 'vue'
 import { RouterLink } from 'vue-router'
-import router from '~/src/router'
+import router from '@/router'
 
 const props = defineProps<{
   propagate?: boolean

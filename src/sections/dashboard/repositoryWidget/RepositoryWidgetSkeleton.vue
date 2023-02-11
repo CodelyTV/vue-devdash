@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import styles from './GitHubRepositoryWidget.module.css'
+import styles from './RepositoryWidget.module.css'
 import Skeleton from '@/shared/components/Skeleton.vue'
 import PullRequests from '@/assets/icons/git-pull-request.svg?component'
 import IssueOpened from '@/assets/icons/issue-opened.svg?component'

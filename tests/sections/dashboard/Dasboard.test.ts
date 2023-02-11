@@ -4,8 +4,10 @@ import { render, screen } from '~/tests'
 import type { GitHubRepositoryRepository } from '@/domain/GitHubRepositoryRepository'
 import Dashboard from '@/sections/dashboard/Dashboard.vue'
 import { GitHubRepositoryMother } from '~/tests/GitHubRepositoryMother'
+import type { RepositoryWidgetRepository } from '@/domain/RepositoryWidgetRepository'
 
 const mockRepository = mock<GitHubRepositoryRepository>()
+const mockRepositoryWidget = mock<RepositoryWidgetRepository>()
 
 describe('Dashboard section', () => {
   test('should show all widgets', async () => {
@@ -14,7 +16,8 @@ describe('Dashboard section', () => {
 
     render(Dashboard, {
       props: {
-        repository: mockRepository,
+        gitHubRepositoryRepository: mockRepository,
+        repositoryWidgetRepository: mockRepositoryWidget,
       },
     })
 
@@ -31,7 +34,8 @@ describe('Dashboard section', () => {
 
     render(Dashboard, {
       props: {
-        repository: mockRepository,
+        gitHubRepositoryRepository: mockRepository,
+        repositoryWidgetRepository: mockRepositoryWidget,
       },
     })
 
@@ -47,7 +51,8 @@ describe('Dashboard section', () => {
 
     render(Dashboard, {
       props: {
-        repository: mockRepository,
+        gitHubRepositoryRepository: mockRepository,
+        repositoryWidgetRepository: mockRepositoryWidget,
       },
     })
 

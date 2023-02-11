@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import WidgetSkeleton from './WidgetSkeleton.vue'
+import WidgetSkeleton from './RepositoryWidgetSkeleton.vue'
 import SkeletonTheme from '@/shared/components/SkeletonTheme.vue'
 
 const props = defineProps<{

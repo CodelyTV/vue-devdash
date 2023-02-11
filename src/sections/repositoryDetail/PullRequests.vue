@@ -3,7 +3,7 @@ import styles from './GitHubRepositoryDetail.module.css'
 import { useGitHubRepositoryPullRequests } from './useGitHubRepositoryPullRequests'
 import type { RepositoryId } from '@/domain/GitHubRepository'
 import type { GitHubRepositoryPullRequestRepository } from '@/domain/GitHubRepositoryPullRequestRepository'
-import Loader from '~/src/shared/components/Loader.vue'
+import Loader from '@/shared/components/Loader.vue'
 
 const props = defineProps<{ repository: GitHubRepositoryPullRequestRepository; repositoryId: RepositoryId }>()
 

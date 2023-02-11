@@ -1,17 +1,22 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import styles from './Dashboard.module.css'
-import GitHubRepositoryWidget from './GitHubRepositoryWidget.vue'
-import { useGitHubRepositories } from './useGitHubRepositories'
-import WidgetsSkeleton from './WidgetsSkeleton.vue'
+import GitHubRepositoryWidget from './gitHubRepositoryWidget/GitHubRepositoryWidget.vue'
+import { useGitHubRepositories } from './gitHubRepositoryWidget/useGitHubRepositories'
+import WidgetsSkeleton from './repositoryWidget/RepositoryWidgetsSkeleton.vue'
+import AddRepositoryWidgetForm from './repositoryWidget/AddRepositoryWidgetForm.vue'
 import type { GitHubRepositoryRepository } from '@/domain/GitHubRepositoryRepository'
 import { config } from '@/config'
+import type { RepositoryWidgetRepository } from '@/domain/RepositoryWidgetRepository'
 
-const props = defineProps<{ repository: GitHubRepositoryRepository }>()
+const props = defineProps<{
+  gitHubRepositoryRepository: GitHubRepositoryRepository
+  repositoryWidgetRepository: RepositoryWidgetRepository
+}>()
 
 const gitHubRepositoryUrls = computed(() => config.widgets.map(widget => widget.repository_url))
 
-const { repositoryData, isLoading } = useGitHubRepositories(props.repository, gitHubRepositoryUrls.value)
+const { repositoryData, isLoading } = useGitHubRepositories(props.gitHubRepositoryRepository, gitHubRepositoryUrls.value)
 </script>
 
 <template>
@@ -30,5 +35,7 @@ const { repositoryData, isLoading } = useGitHubRepositories(props.repository, gi
       :loading="isLoading"
       :repository="repo"
     />
+
+    <AddRepositoryWidgetForm :repository="repositoryWidgetRepository" />
   </section>
 </template>

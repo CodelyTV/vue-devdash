@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import styles from './GitHubRepositoryWidget.module.css'
+import styles from '../repositoryWidget/RepositoryWidget.module.css'
 import Check from '@/assets/icons/check.svg?component'
 import Error from '@/assets/icons/error.svg?component'
 import PullRequests from '@/assets/icons/git-pull-request.svg?component'

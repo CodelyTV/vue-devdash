@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { RouterLink, RouterView } from 'vue-router'
-import Logo from '../../assets/logo.svg?component'
 import styles from './Layout.module.css'
-import ErrorBoundary from '~/src/shared/components/ErrorBoundary.vue'
+import Logo from '@/assets/logo.svg?component'
+import ErrorBoundary from '@/shared/components/ErrorBoundary.vue'
 </script>
 
 <template>
