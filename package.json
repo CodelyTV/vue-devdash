@@ -14,6 +14,7 @@
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore"
   },
   "dependencies": {
+    "nprogress": "^0.2.0",
     "vue": "^3.2.47",
     "vue-router": "^4.1.6"
   },
@@ -24,6 +25,7 @@
     "@testing-library/vue": "^6.6.1",
     "@types/jsdom": "^20.0.1",
     "@types/node": "^18.11.12",
+    "@types/nprogress": "^0.2.0",
     "@types/testing-library__jest-dom": "^5.14.5",
     "@vitejs/plugin-vue": "^4.0.0",
     "@vue/test-utils": "^2.2.10",
