@@ -4,6 +4,7 @@ specifiers:
   '@antfu/eslint-config': ^0.35.1
   '@faker-js/faker': ^7.6.0
   '@testing-library/jest-dom': ^5.16.5
+  '@testing-library/user-event': ^14.4.3
   '@testing-library/vue': ^6.6.1
   '@types/jsdom': ^20.0.1
   '@types/node': ^18.11.12
@@ -43,6 +44,7 @@ devDependencies:
   '@antfu/eslint-config': 0.35.1_4vsywjlpuriuw3tl5oq6zy5a64
   '@faker-js/faker': 7.6.0
   '@testing-library/jest-dom': 5.16.5
+  '@testing-library/user-event': 14.4.3
   '@testing-library/vue': 6.6.1_vue@3.2.47
   '@types/jsdom': 20.0.1
   '@types/node': 18.11.18
@@ -857,6 +859,13 @@ packages:
       dom-accessibility-api: 0.5.16
       lodash: 4.17.21
       redent: 3.0.0
+    dev: true
+
+  /@testing-library/user-event/14.4.3:
+    resolution: {integrity: sha512-kCUc5MEwaEMakkO5x7aoD+DLi02ehmEM2QCGWvNqAS1dV/fAvORWEjnjsEIvml59M7Y5kCkWN6fCCyPOe8OL6Q==}
+    engines: {node: '>=12', npm: '>=6'}
+    peerDependencies:
+      '@testing-library/dom': '>=7.21.4'
     dev: true
 
   /@testing-library/vue/6.6.1_vue@3.2.47:

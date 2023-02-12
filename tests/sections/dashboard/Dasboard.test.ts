@@ -1,6 +1,6 @@
 import { describe, expect, test } from 'vitest'
 import { mock } from 'vitest-mock-extended'
-import { render, screen } from '~/tests'
+import { renderWithRouter, screen } from '~/tests'
 import type { GitHubRepositoryRepository } from '@/domain/GitHubRepositoryRepository'
 import Dashboard from '@/sections/dashboard/Dashboard.vue'
 import { GitHubRepositoryMother } from '~/tests/GitHubRepositoryMother'
@@ -14,7 +14,7 @@ describe('Dashboard section', () => {
     const gitHubRepository = GitHubRepositoryMother.create()
     mockRepository.search.mockResolvedValue([gitHubRepository])
 
-    render(Dashboard, {
+    renderWithRouter(Dashboard, {
       props: {
         gitHubRepositoryRepository: mockRepository,
         repositoryWidgetRepository: mockRepositoryWidget,
@@ -32,7 +32,7 @@ describe('Dashboard section', () => {
   test('should show not results message when there are no widgets', async () => {
     mockRepository.search.mockResolvedValue([])
 
-    render(Dashboard, {
+    renderWithRouter(Dashboard, {
       props: {
         gitHubRepositoryRepository: mockRepository,
         repositoryWidgetRepository: mockRepositoryWidget,
@@ -49,7 +49,7 @@ describe('Dashboard section', () => {
 
     mockRepository.search.mockResolvedValue([gitHubRepository])
 
-    render(Dashboard, {
+    renderWithRouter(Dashboard, {
       props: {
         gitHubRepositoryRepository: mockRepository,
         repositoryWidgetRepository: mockRepositoryWidget,

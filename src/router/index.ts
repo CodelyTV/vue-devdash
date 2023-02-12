@@ -7,6 +7,10 @@ import { config } from '@/config'
 import { GitHubApiGitHubRepositoryRepository } from '@/infrastructure/GitHubApiGitHubRepositoryRepository'
 import { LocalStorageRepositoryWidgetRepository } from '@/infrastructure/LocalStorageRepositoryWidgetRepository'
 
+const gitHubRepositoryRepository = new GitHubApiGitHubRepositoryRepository(config.github_access_token)
+const repositoryWidgetRepository = new LocalStorageRepositoryWidgetRepository()
+const gitHubRepositoryPullRequestRepository = new GitHubApiGitHubRepositoryPullRequestRepository(config.github_access_token)
+
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -19,8 +23,6 @@ const router = createRouter({
           component: Dashboard,
           name: 'dashboard',
           props: () => {
-            const gitHubRepositoryRepository = new GitHubApiGitHubRepositoryRepository(config.github_access_token)
-            const repositoryWidgetRepository = new LocalStorageRepositoryWidgetRepository()
             return {
               gitHubRepositoryRepository,
               repositoryWidgetRepository,
@@ -32,8 +34,6 @@ const router = createRouter({
           name: 'repository',
           component: () => import('@/sections/repositoryDetail/GithubRepositoryDetail.vue'),
           props: (route) => {
-            const gitHubRepositoryRepository = new GitHubApiGitHubRepositoryRepository(config.github_access_token)
-            const gitHubRepositoryPullRequestRepository = new GitHubApiGitHubRepositoryPullRequestRepository(config.github_access_token)
             return {
               gitHubRepositoryRepository,
               gitHubRepositoryPullRequestRepository,
