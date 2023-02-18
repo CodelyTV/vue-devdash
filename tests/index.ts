@@ -4,25 +4,21 @@ import { RouterLinkStub } from '@vue/test-utils'
 import UserEvent from '@testing-library/user-event'
 import router from '@/router'
 
-interface RenderOptionsWithUser { user: typeof UserEvent }
+interface RenderResultWithUser extends RenderResult {
+  user: typeof UserEvent
+}
 
 export * from '@testing-library/vue'
 
-export function render(testComponent: unknown, options: RenderOptions = {}): RenderOptionsWithUser {
+export function render(testComponent: unknown, options: RenderOptions = {}): RenderResultWithUser {
   return {
     user: UserEvent.setup() as unknown as typeof UserEvent,
-    ...tlRender(testComponent, options),
+    ...tlRender(testComponent, {
+      ...options,
+      global: {
+        plugins: [router],
+        stubs: { RouterLink: RouterLinkStub },
+      },
+    }),
   }
-}
-
-export function renderWithRouter(testComponent: unknown, options: RenderOptions = {}): RenderResult {
-  return tlRender(testComponent, {
-    ...options,
-    global: {
-      plugins: [
-        router,
-      ],
-      stubs: { RouterLink: RouterLinkStub },
-    },
-  })
 }
