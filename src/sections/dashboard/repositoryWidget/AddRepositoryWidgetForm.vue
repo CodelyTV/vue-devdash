@@ -27,7 +27,6 @@ async function submitForm(event: Event) {
   const error = await save({ id: id.value, repositoryUrl: repositoryUrl.value })
   hasError.value = !!error
   errorMessage.value = error ? error.message : ''
-
   isFormActive.value = false
 }
 </script>

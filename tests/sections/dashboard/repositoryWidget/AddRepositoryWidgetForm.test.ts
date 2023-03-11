@@ -24,7 +24,7 @@ describe('AddRepositoryWidgetForm', () => {
     expect(url).toBeInTheDocument()
   })
 
-  test('should save new widget when form is submitted', async () => {
+  test('should save a new widget when form is submitted', async () => {
     mockRepository.search.mockResolvedValue([])
 
     const newWidget: RepositoryWidget = {
@@ -102,7 +102,7 @@ describe('AddRepositoryWidgetForm', () => {
     })
 
     expect(errorMessage).toBeInTheDocument()
-    expect(mockRepository.save).not.toHaveBeenCalledWith(newWidgetWithSameUrl)
+    expect(mockRepository.save).not.toHaveBeenCalled()
   })
 
   test('should show an error when the url is invalid', async () => {
@@ -140,7 +140,7 @@ describe('AddRepositoryWidgetForm', () => {
     })
 
     expect(errorMessage).toBeInTheDocument()
-    expect(mockRepository.save).not.toHaveBeenCalledWith(newWidget)
+    expect(mockRepository.save).not.toHaveBeenCalled()
   })
 
   test('should show an error when the url has not a GitHub host name', async () => {
@@ -178,6 +178,53 @@ describe('AddRepositoryWidgetForm', () => {
     })
 
     expect(errorMessage).toBeInTheDocument()
-    expect(mockRepository.save).not.toHaveBeenCalledWith(newWidget)
+    expect(mockRepository.save).not.toHaveBeenCalled()
+  })
+
+  test('should save a new widget after fix form errors', async () => {
+    mockRepository.search.mockResolvedValue([])
+
+    const invalidUrl = 'https://bitbucket.org/CodelyTV/DevDash'
+
+    const newWidget: RepositoryWidget = {
+      id: 'newWidgetId',
+      repositoryUrl: 'https://github.com/CodelyTV/DevDash',
+    }
+
+    const { user } = render(AddRepositoryWidgetForm, {
+      props: {
+        repository: mockRepository,
+      },
+    })
+
+    const addButton = await screen.findByRole('button', {
+      name: /add repository/i,
+    })
+    await user.click(addButton)
+
+    const id = screen.getByLabelText(/id/i)
+    await user.type(id, newWidget.id)
+
+    const url = screen.getByLabelText(/repository url/i)
+    await user.type(url, invalidUrl)
+
+    const submitButton = await screen.findByRole('button', {
+      name: /Add/,
+    })
+    await user.click(submitButton)
+
+    const errorMessage = await screen.findByRole('alert', {
+      description: new RegExp(`The ${invalidUrl} is not a valid GitHub repository url`, 'i'),
+    })
+
+    expect(errorMessage).toBeInTheDocument()
+    expect(mockRepository.save).not.toHaveBeenCalled()
+
+    await user.clear(url)
+    await user.type(url, newWidget.repositoryUrl)
+    await user.click(submitButton)
+
+    expect(errorMessage).not.toBeInTheDocument()
+    expect(mockRepository.save).toHaveBeenCalledWith(newWidget)
   })
 })
