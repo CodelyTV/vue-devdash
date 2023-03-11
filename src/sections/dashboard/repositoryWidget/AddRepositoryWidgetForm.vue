@@ -17,14 +17,17 @@ type FormEvent<T> = Event & {
 const props = defineProps<{ repository: RepositoryWidgetRepository }>()
 
 const isFormActive = ref(false)
-const hasAlreadyExistsError = ref(false)
+const hasError = ref(false)
+const errorMessage = ref<string>('')
 
 const { save } = useAddRepositoryWidget(props.repository)
 
 async function submitForm(event: Event) {
   const { id, repositoryUrl } = (event as FormEvent<FormData>).target.elements
   const error = await save({ id: id.value, repositoryUrl: repositoryUrl.value })
-  hasAlreadyExistsError.value = !!error
+  hasError.value = !!error
+  errorMessage.value = error ? error.message : ''
+
   isFormActive.value = false
 }
 </script>
@@ -32,7 +35,7 @@ async function submitForm(event: Event) {
 <template>
   <article :class="styles.add_widget">
     <div :class="styles.container">
-      <form v-if="isFormActive || hasAlreadyExistsError" :class="styles.form" @submit.prevent="submitForm">
+      <form v-if="isFormActive || hasError" :class="styles.form" @submit.prevent="submitForm">
         <div>
           <label for="id">Id</label>
           <input id="id" type="text">
@@ -45,8 +48,8 @@ async function submitForm(event: Event) {
           <button>Add</button>
         </div>
 
-        <p v-if="hasAlreadyExistsError" role="alert" aria-describedby="duplicated-error">
-          <span id="duplicated-error">The repository already exists</span>
+        <p v-if="hasError" role="alert" aria-describedby="form-error">
+          <span id="form-error">{{ errorMessage }}</span>
         </p>
       </form>
 
