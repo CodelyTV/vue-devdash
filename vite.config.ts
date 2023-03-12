@@ -15,9 +15,9 @@ export default defineConfig({
   },
 
   test: {
-    include: ['tests/**/*.test.ts'],
+    include: ['tests/unit/**/*.test.ts'],
     environment: 'jsdom',
-    setupFiles: 'tests/vitest.setup.ts',
+    setupFiles: 'tests/unit/vitest.setup.ts',
     mockReset: true,
     deps: {
       inline: ['@vue'],
