@@ -1,4 +1,4 @@
-import { type Ref, ref, watchEffect } from 'vue'
+import { type Ref, ref, watch } from 'vue'
 import type { GitHubRepository } from '@/domain/GitHubRepository'
 import type { GitHubRepositoryRepository } from '@/domain/GitHubRepositoryRepository'
 
@@ -12,12 +12,15 @@ export function useGitHubRepositories(
   const repositoryData = ref<GitHubRepository[]>([])
   const isLoading = ref(false)
 
-  watchEffect(() => {
+  watch(() => repositoryUrls, () => {
     isLoading.value = true
+
     repository.search(repositoryUrls).then((data) => {
       repositoryData.value = data
       isLoading.value = false
     })
+  }, {
+    immediate: true,
   })
 
   return {
