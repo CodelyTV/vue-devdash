@@ -3,6 +3,7 @@ lockfileVersion: 5.4
 specifiers:
   '@antfu/eslint-config': ^0.35.1
   '@faker-js/faker': ^7.6.0
+  '@testing-library/cypress': ^9.0.0
   '@testing-library/jest-dom': ^5.16.5
   '@testing-library/user-event': ^14.4.3
   '@testing-library/vue': ^6.6.1
@@ -43,6 +44,7 @@ dependencies:
 devDependencies:
   '@antfu/eslint-config': 0.35.1_4vsywjlpuriuw3tl5oq6zy5a64
   '@faker-js/faker': 7.6.0
+  '@testing-library/cypress': 9.0.0_cypress@12.5.1
   '@testing-library/jest-dom': 5.16.5
   '@testing-library/user-event': 14.4.3
   '@testing-library/vue': 6.6.1_vue@3.2.47
@@ -832,6 +834,17 @@ packages:
     resolution: {integrity: sha512-gFukHN4t8K4+wVC+ECqeqwzBDeFeTzBXroBTqE6vcWrQGbEUpHO7LYdG0f4xnvYq4VOEwITSlHlp0JBAIFMS/g==}
     dev: true
 
+  /@testing-library/cypress/9.0.0_cypress@12.5.1:
+    resolution: {integrity: sha512-c1XiCGeHGGTWn0LAU12sFUfoX3qfId5gcSE2yHode+vsyHDWraxDPALjVnHd4/Fa3j4KBcc5k++Ccy6A9qnkMA==}
+    engines: {node: '>=12', npm: '>=6'}
+    peerDependencies:
+      cypress: ^12.0.0
+    dependencies:
+      '@babel/runtime': 7.20.13
+      '@testing-library/dom': 8.20.0
+      cypress: 12.5.1
+    dev: true
+
   /@testing-library/dom/8.20.0:
     resolution: {integrity: sha512-d9ULIT+a4EXLX3UU8FBjauG9NnsZHkHztXoIcTsOKoOw030fyjheN9svkTULjJxtYag9DZz5Jz5qkWZDPxTFwA==}
     engines: {node: '>=12'}
@@ -925,7 +938,7 @@ packages:
     resolution: {integrity: sha512-VaywcGQ9tPorCX/Jkkni7RWGFfI11whqzs8dvxF41P17Z+z872thvEvlIbznjPJ02kl1HMX3LmLOonsj2n7HeQ==}
     dependencies:
       expect: 29.4.2
-      pretty-format: 29.4.1
+      pretty-format: 29.4.2
     dev: true
 
   /@types/jsdom/20.0.1:
@@ -4868,15 +4881,6 @@ packages:
       ansi-regex: 5.0.1
       ansi-styles: 5.2.0
       react-is: 17.0.2
-    dev: true
-
-  /pretty-format/29.4.1:
-    resolution: {integrity: sha512-dt/Z761JUVsrIKaY215o1xQJBGlSmTx/h4cSqXqjHLnU1+Kt+mavVE7UgqJJO5ukx5HjSswHfmXz4LjS2oIJfg==}
-    engines: {node: ^14.15.0 || ^16.10.0 || >=18.0.0}
-    dependencies:
-      '@jest/schemas': 29.4.2
-      ansi-styles: 5.2.0
-      react-is: 18.2.0
     dev: true
 
   /pretty-format/29.4.2:

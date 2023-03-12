@@ -52,7 +52,7 @@ async function submitForm(event: Event) {
         </p>
       </form>
 
-      <button v-else :class="styles.add_button" @click="isFormActive = true">
+      <button v-else role="button" :class="styles.add_button" @click="isFormActive = true">
         <Add />
         <p>Add repository</p>
       </button>
