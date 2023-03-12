@@ -1,10 +1,11 @@
 import { type Ref, ref, watch } from 'vue'
+import { type MaybeComputedRef, resolveUnref } from '@vueuse/core'
 import type { GitHubRepository } from '@/domain/GitHubRepository'
 import type { GitHubRepositoryRepository } from '@/domain/GitHubRepositoryRepository'
 
 export function useGitHubRepositories(
   repository: GitHubRepositoryRepository,
-  repositoryUrls: string[],
+  repositoryUrls: MaybeComputedRef<string[]>,
 ): {
     repositoryData: Ref<GitHubRepository[]>
     isLoading: Ref<boolean>
@@ -12,15 +13,13 @@ export function useGitHubRepositories(
   const repositoryData = ref<GitHubRepository[]>([])
   const isLoading = ref(false)
 
-  watch(() => repositoryUrls, () => {
+  watch(repositoryUrls, () => {
     isLoading.value = true
 
-    repository.search(repositoryUrls).then((data) => {
+    repository.search(resolveUnref(repositoryUrls)).then((data) => {
       repositoryData.value = data
       isLoading.value = false
     })
-  }, {
-    immediate: true,
   })
 
   return {

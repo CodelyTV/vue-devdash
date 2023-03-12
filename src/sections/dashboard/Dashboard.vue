@@ -14,10 +14,10 @@ const props = defineProps<{
   repositoryWidgetRepository: RepositoryWidgetRepository
 }>()
 
-const { repositoryWidgets } = useRepositoryWidgets()
+const { repositoryWidgets } = useRepositoryWidgets(props.repositoryWidgetRepository)
 const gitHubRepositoryUrls = computed(() => repositoryWidgets.value.map(widget => widget.repositoryUrl))
 
-const { repositoryData, isLoading } = useGitHubRepositories(props.gitHubRepositoryRepository, gitHubRepositoryUrls.value)
+const { repositoryData, isLoading } = useGitHubRepositories(props.gitHubRepositoryRepository, gitHubRepositoryUrls)
 </script>
 
 <template>
