@@ -14,6 +14,11 @@ export class LocalStorageRepositoryWidgetRepository implements RepositoryWidgetR
   }
 
   async save(widget: RepositoryWidget): Promise<void> {
-    await Promise.resolve()
+    const currentRepositoryWidget = await this.search()
+
+    localStorage.setItem(
+      this.localStorageKey,
+      JSON.stringify([...currentRepositoryWidget, widget]),
+    )
   }
 }

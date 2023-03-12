@@ -1,7 +1,8 @@
-import { type Ref, onBeforeMount, ref } from 'vue'
+import { type Ref, onBeforeMount, onUnmounted, ref } from 'vue'
 import type { RepositoryWidget } from '@/domain/RepositoryWidget'
 import type { RepositoryWidgetRepository } from '@/domain/RepositoryWidgetRepository'
 import { config } from '@/config'
+import { DomainEvents } from '@/domain/DomainEvents'
 
 const repositoryWidgets = ref<RepositoryWidget[]>([])
 
@@ -13,6 +14,16 @@ export function useRepositoryWidgets(repositoryWidgetRepository: RepositoryWidge
       widgets = config.widgets.map(widget => ({ id: widget.id, repositoryUrl: widget.repository_url }))
 
     repositoryWidgets.value = widgets
+  })
+
+  async function reloadRepositoryWidgets() {
+    repositoryWidgets.value = await repositoryWidgetRepository.search()
+  }
+
+  document.addEventListener(DomainEvents.repositoryWidgetAdded, reloadRepositoryWidgets)
+
+  onUnmounted(() => {
+    document.removeEventListener(DomainEvents.repositoryWidgetAdded, reloadRepositoryWidgets)
   })
 
   return {
