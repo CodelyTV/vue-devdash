@@ -1,10 +1,13 @@
-import type { CSSProperties, ComputedRef } from 'vue'
+import type { CSSProperties, ComputedRef, Ref } from 'vue'
 import { computed, inject, ref } from 'vue'
 import type { SkeletonProps } from './Skeleton'
 import { SkeletonThemePropsKey } from './Skeleton'
 import { parseVal } from './utils'
 
-export const useSkeleton = (props: SkeletonProps) => {
+export function useSkeleton(props: SkeletonProps): {
+  className: ComputedRef<string>
+  elements: Ref<{ style: CSSProperties }[]>
+} {
   const themeProps = inject(SkeletonThemePropsKey, {}) as ComputedRef
   const elements = ref<{ style: CSSProperties }[]>([])
   const className = computed(() => props.className ? props.className : '')
