@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import styles from '../repositoryWidget/RepositoryWidget.module.css'
 import Check from '@/assets/icons/check.svg?component'
 import Error from '@/assets/icons/error.svg?component'
 import PullRequests from '@/assets/icons/git-pull-request.svg?component'
@@ -29,9 +28,9 @@ function isoToReadableDate(lastUpdateDate: Date): string {
 </script>
 
 <template>
-  <article :class="styles.widget">
-    <header :class="styles.widget__header">
-      <h2 :class="styles.widget__title">
+  <article :class="$style.widget">
+    <header :class="$style.widget__header">
+      <h2 :class="$style.widget__title">
         <RouterLink
           :to="{ name: 'repository', params: { organization: props.repository.id.organization, name: props.repository.id.name } }"
           :title="`${props.repository.id.organization}/${props.repository.id.name}`"
@@ -43,40 +42,42 @@ function isoToReadableDate(lastUpdateDate: Date): string {
       <Unlock v-else />
     </header>
 
-    <div :class="styles.widget__body">
-      <div :class="styles.widget__status">
+    <div :class="$style.widget__body">
+      <div :class="$style.widget__status">
         <p>Last update {{ isoToReadableDate(props.repository.updatedAt) }}</p>
         <template v-if="props.repository.hasWorkflows">
           <Check v-if="props.repository.isLastWorkflowSuccess" />
           <Error v-else />
         </template>
       </div>
-      <p :class="styles.widget__description">
+      <p :class="$style.widget__description">
         {{ props.repository.description }}
       </p>
     </div>
 
-    <footer :class="styles.widget__footer">
-      <div :class="styles.widget__stat">
+    <footer :class="$style.widget__footer">
+      <div :class="$style.widget__stat">
         <Start />
         <span>{{ props.repository.stars }}</span>
       </div>
-      <div :class="styles.widget__stat">
+      <div :class="$style.widget__stat">
         <Watchers />
         <span>{{ props.repository.watchers }}</span>
       </div>
-      <div :class="styles.widget__stat">
+      <div :class="$style.widget__stat">
         <Forks />
         <span>{{ props.repository.forks }}</span>
       </div>
-      <div :class="styles.widget__stat">
+      <div :class="$style.widget__stat">
         <IssueOpened />
         <span>{{ props.repository.issues }}</span>
       </div>
-      <div :class="styles.widget__stat">
+      <div :class="$style.widget__stat">
         <PullRequests />
         <span>{{ props.repository.pullRequests }}</span>
       </div>
     </footer>
   </article>
 </template>
+
+<style module src="../repositoryWidget/RepositoryWidget.module.css" />

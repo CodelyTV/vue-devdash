@@ -1,10 +1,6 @@
-<script setup lang="ts">
-import styles from './Loader.module.css'
-</script>
-
 <template>
-  <div :class="styles.loader__container">
-    <div :class="styles['lds-ellipsis']">
+  <div :class="$style.loader__container">
+    <div :class="$style['lds-ellipsis']">
       <div />
       <div />
       <div />
@@ -12,3 +8,5 @@ import styles from './Loader.module.css'
     </div>
   </div>
 </template>
+
+<style module src="./Loader.module.css" />

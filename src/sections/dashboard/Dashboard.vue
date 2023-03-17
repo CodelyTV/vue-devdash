@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { computed } from 'vue'
-import styles from './Dashboard.module.css'
 import { useGitHubRepositories } from './gitHubRepositoryWidget/useGitHubRepositories'
 import WidgetsSkeleton from './repositoryWidget/RepositoryWidgetsSkeleton.vue'
 import AddRepositoryWidgetForm from './repositoryWidget/AddRepositoryWidgetForm.vue'
@@ -21,7 +20,7 @@ const { repositoryData, isLoading } = useGitHubRepositories(props.gitHubReposito
 </script>
 
 <template>
-  <section :class="styles.container">
+  <section :class="$style.container">
     <WidgetsSkeleton v-if="isLoading" :number-of-widgets="gitHubRepositoryUrls.length" />
 
     <template v-else>
@@ -36,7 +35,9 @@ const { repositoryData, isLoading } = useGitHubRepositories(props.gitHubReposito
     <AddRepositoryWidgetForm :repository="repositoryWidgetRepository" />
   </section>
 
-  <div v-if="!isLoading && repositoryData.length === 0" :class="styles.empty">
+  <div v-if="!isLoading && repositoryData.length === 0" :class="$style.empty">
     <span>No widgets are configured.</span>
   </div>
 </template>
+
+<style module src="./Dashboard.module.css" />
