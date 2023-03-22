@@ -5,6 +5,7 @@ import Layout from '@/sections/layout/Layout.vue'
 import Dashboard from '@/sections/dashboard/Dashboard.vue'
 import { config } from '@/config'
 import { GitHubApiGitHubRepositoryRepository } from '@/infrastructure/GitHubApiGitHubRepositoryRepository'
+import { LocalStorageRepositoryWidgetRepository } from '@/infrastructure/LocalStorageRepositoryWidgetRepository'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -18,9 +19,11 @@ const router = createRouter({
           component: Dashboard,
           name: 'dashboard',
           props: () => {
-            const repository = new GitHubApiGitHubRepositoryRepository(config.github_access_token)
+            const gitHubRepositoryRepository = new GitHubApiGitHubRepositoryRepository(config.github_access_token)
+            const repositoryWidgetRepository = new LocalStorageRepositoryWidgetRepository()
             return {
-              repository,
+              gitHubRepositoryRepository,
+              repositoryWidgetRepository,
             }
           },
         },
