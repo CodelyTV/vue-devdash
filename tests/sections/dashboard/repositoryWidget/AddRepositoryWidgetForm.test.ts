@@ -1,9 +1,10 @@
-import { describe, expect, test } from 'vitest'
+import { describe, expect, test, vi } from 'vitest'
 import { mock } from 'vitest-mock-extended'
 import AddRepositoryWidgetForm from '@/sections/dashboard/repositoryWidget/AddRepositoryWidgetForm.vue'
 import type { RepositoryWidget } from '@/domain/RepositoryWidget'
 import { render, screen } from '~/tests'
 import type { LocalStorageRepositoryWidgetRepository } from '@/infrastructure/LocalStorageRepositoryWidgetRepository'
+import { DomainEvents } from '@/domain/DomainEvents'
 
 const mockRepository = mock<LocalStorageRepositoryWidgetRepository>()
 
@@ -25,6 +26,7 @@ describe('AddRepositoryWidgetForm', () => {
   })
 
   test('should save a new widget when form is submitted', async () => {
+    const dispatchEventSpy = vi.spyOn(document, 'dispatchEvent')
     mockRepository.search.mockResolvedValue([])
 
     const newWidget: RepositoryWidget = {
@@ -60,6 +62,9 @@ describe('AddRepositoryWidgetForm', () => {
 
     expect(addAnotherRepositoryFormButton).toBeInTheDocument()
     expect(mockRepository.save).toHaveBeenCalledWith(newWidget)
+
+    expect(dispatchEventSpy).toHaveBeenCalledWith(expect.any(CustomEvent))
+    expect(dispatchEventSpy.mock.calls[0][0].type).toEqual(DomainEvents.repositoryWidgetAdded)
   })
 
   test('should show an error when repository already exists in Dashboard', async () => {

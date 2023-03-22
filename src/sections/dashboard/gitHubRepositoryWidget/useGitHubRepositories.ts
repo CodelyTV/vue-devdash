@@ -15,7 +15,6 @@ export function useGitHubRepositories(
 
   watch(repositoryUrls, () => {
     isLoading.value = true
-
     repository.search(resolveUnref(repositoryUrls)).then((data) => {
       repositoryData.value = data
       isLoading.value = false

@@ -1,3 +1,4 @@
+import { DomainEvents } from '@/domain/DomainEvents'
 import { RepositoryAlreadyExistsError } from '@/domain/RepositoryAlreadyExistsError'
 import { RepositoryInvalidUrlError } from '@/domain/RepositoryInvalidUrlErrorr'
 import type { RepositoryWidget } from '@/domain/RepositoryWidget'
@@ -28,6 +29,7 @@ export function useAddRepositoryWidget(repository: RepositoryWidgetRepository): 
       return new RepositoryAlreadyExistsError(widget.repositoryUrl)
 
     await repository.save(widget)
+    document.dispatchEvent(new CustomEvent(DomainEvents.repositoryWidgetAdded))
   }
 
   return { save }
