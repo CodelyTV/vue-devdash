@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import styles from './AddRepositoryWidgetForm.module.css'
 import { useAddRepositoryWidget } from './useAddRepositoryWidget'
 import Add from '@/assets/icons/add.svg?component'
 import type { RepositoryWidgetRepository } from '@/domain/RepositoryWidgetRepository'
@@ -29,9 +28,9 @@ async function submitForm(event: Event) {
 </script>
 
 <template>
-  <article :class="styles.add_widget">
-    <div :class="styles.container">
-      <form v-if="isFormActive || hasError" :class="styles.form" @submit.prevent="submitForm">
+  <article :class="$style.add_widget">
+    <div :class="$style.container">
+      <form v-if="isFormActive || hasError" :class="$style.form" @submit.prevent="submitForm">
         <div>
           <label for="id">Id</label>
           <input id="id" type="text">
@@ -49,10 +48,12 @@ async function submitForm(event: Event) {
         </p>
       </form>
 
-      <button v-else role="button" :class="styles.add_button" @click="isFormActive = true">
+      <button v-else role="button" :class="$style.add_button" @click="isFormActive = true">
         <Add />
         <p>Add repository</p>
       </button>
     </div>
   </article>
 </template>
+
+<style module src="./AddRepositoryWidgetForm.module.css" />

@@ -2,7 +2,6 @@
 import { computed, ref } from 'vue'
 import { useElementVisibility } from '@vueuse/core'
 import { useGitHubRepository } from './useGitHubRepository'
-import styles from './GithubRepositoryDetail.module.css'
 import PullRequests from './PullRequests.vue'
 import Lock from '@/assets/icons/lock.svg?component'
 import Unlock from '@/assets/icons/unlock.svg?component'
@@ -29,10 +28,10 @@ const pullRequestsVisible = useElementVisibility(pullRequestsRef)
     The repository does not exist.
   </div>
 
-  <section v-else :class="styles['repository-detail']">
-    <header :class="styles.header">
+  <section v-else :class="$style['repository-detail']">
+    <header :class="$style.header">
       <a :href="repositoryData.url" target="_blank" rel="noreferrer">
-        <h2 :class="styles.header__title">
+        <h2 :class="$style.header__title">
           {{ repositoryData.id.organization }}/{{ repositoryData.id.name }}
         </h2>
       </a>
@@ -43,7 +42,7 @@ const pullRequestsVisible = useElementVisibility(pullRequestsRef)
     <p>{{ repositoryData.description }}</p>
 
     <h3>Repository stats</h3>
-    <table :class="styles.detail__table">
+    <table :class="$style.detail__table">
       <thead>
         <tr>
           <th>Stars</th>
@@ -70,7 +69,7 @@ const pullRequestsVisible = useElementVisibility(pullRequestsRef)
       <p>
         ⏱️Last workflow run: {{ repositoryData.workflowRunsStatus[0].createdAt.toLocaleDateString("es-ES") }}
       </p>
-      <table :class="styles.detail__table">
+      <table :class="$style.detail__table">
         <thead>
           <tr>
             <th>Name</th>
@@ -104,3 +103,5 @@ const pullRequestsVisible = useElementVisibility(pullRequestsRef)
     </section>
   </section>
 </template>
+
+<style module src="./GithubRepositoryDetail.module.css" />
