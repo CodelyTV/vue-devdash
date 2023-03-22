@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { computed, ref } from 'vue'
-import Logo from '../../assets/logo.svg?component'
 import styles from './Dashboard.module.css'
 import GitHubRepositoryWidget from './GitHubRepositoryWidget.vue'
 import { useGitHubRepositories } from './useGitHubRepositories'
@@ -15,15 +14,6 @@ const { repositoryData } = useGitHubRepositories(props.repository, gitHubReposit
 </script>
 
 <template>
-  <header :class="styles.header">
-    <section :class="styles.header__container">
-      <Logo />
-      <h1 :class="styles.app__brand">
-        DevDash_
-      </h1>
-    </section>
-  </header>
-
   <div v-if="repositoryData.length === 0" :class="styles.empty">
     <span>No widgets are configured.</span>
   </div>
