@@ -25,6 +25,7 @@
     font-size: 0.875rem;
     white-space: nowrap;
     text-overflow: ellipsis;
+    color: #1a2233;
 
     a {
       color: #1a2233;

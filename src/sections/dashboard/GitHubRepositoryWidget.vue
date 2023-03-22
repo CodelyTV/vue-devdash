@@ -1,17 +1,17 @@
 <script setup lang="ts">
-import Check from '../../assets/icons/check.svg?component'
-import Error from '../../assets/icons/error.svg?component'
-import PullRequests from '../../assets/icons/git-pull-request.svg?component'
-import IssueOpened from '../../assets/icons/issue-opened.svg?component'
-import Lock from '../../assets/icons/lock.svg?component'
-import Forks from '../../assets/icons/repo-forked.svg?component'
-import Start from '../../assets/icons/star.svg?component'
-import Unlock from '../../assets/icons/unlock.svg?component'
-import Watchers from '../../assets/icons/watchers.svg?component'
 import styles from './GitHubRepositoryWidget.module.css'
+import Check from '@/assets/icons/check.svg?component'
+import Error from '@/assets/icons/error.svg?component'
+import PullRequests from '@/assets/icons/git-pull-request.svg?component'
+import IssueOpened from '@/assets/icons/issue-opened.svg?component'
+import Lock from '@/assets/icons/lock.svg?component'
+import Forks from '@/assets/icons/repo-forked.svg?component'
+import Start from '@/assets/icons/star.svg?component'
+import Unlock from '@/assets/icons/unlock.svg?component'
+import Watchers from '@/assets/icons/watchers.svg?component'
 import type { GitHubRepository } from '@/domain/GitHubRepository'
 
-const props = defineProps<{ repository: GitHubRepository }>()
+const props = defineProps<{ repository: GitHubRepository; loading?: boolean }>()
 
 function isoToReadableDate(lastUpdateDate: Date): string {
   const currentDate = new Date()
@@ -42,6 +42,7 @@ function isoToReadableDate(lastUpdateDate: Date): string {
       <Lock v-if="props.repository.private" />
       <Unlock v-else />
     </header>
+
     <div :class="styles.widget__body">
       <div :class="styles.widget__status">
         <p>Last update {{ isoToReadableDate(props.repository.updatedAt) }}</p>
@@ -54,6 +55,7 @@ function isoToReadableDate(lastUpdateDate: Date): string {
         {{ props.repository.description }}
       </p>
     </div>
+
     <footer :class="styles.widget__footer">
       <div :class="styles.widget__stat">
         <Start />
