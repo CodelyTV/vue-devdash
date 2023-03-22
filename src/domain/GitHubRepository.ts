@@ -16,4 +16,15 @@ export interface GitHubRepository {
   forks: number
   issues: number
   pullRequests: number
+  workflowRunsStatus: WorkFlowRunStatus[]
+}
+
+export interface WorkFlowRunStatus {
+  id: number
+  name: string
+  title: string
+  url: string
+  createdAt: Date
+  status: string
+  conclusion: string
 }
