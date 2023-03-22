@@ -10,5 +10,6 @@ export default defineConfig({
     viewportWidth: 1920,
     viewportHeight: 1080,
     supportFile: 'tests/e2e/support/e2e.ts',
+    downloadsFolder: 'tests/e2e/downloads',
   },
 })
