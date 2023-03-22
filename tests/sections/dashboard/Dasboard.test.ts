@@ -1,9 +1,9 @@
 import { describe, expect, test } from 'vitest'
 import { mock } from 'vitest-mock-extended'
-import { render, screen } from '@testing-library/vue'
-import type { GitHubRepositoryRepository } from '../../../src/domain/GitHubRepositoryRepository'
-import Dashboard from '../../../src/sections/dashboard/Dashboard.vue'
-import { GitHubRepositoryMother } from '../../GitHubRepositoryMother'
+import { render, screen } from '~/tests'
+import type { GitHubRepositoryRepository } from '@/domain/GitHubRepositoryRepository'
+import Dashboard from '@/sections/dashboard/Dashboard.vue'
+import { GitHubRepositoryMother } from '~/tests/GitHubRepositoryMother'
 
 const mockRepository = mock<GitHubRepositoryRepository>()
 

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, ref } from 'vue'
+import { computed } from 'vue'
 import styles from './Dashboard.module.css'
 import GitHubRepositoryWidget from './GitHubRepositoryWidget.vue'
 import { useGitHubRepositories } from './useGitHubRepositories'
