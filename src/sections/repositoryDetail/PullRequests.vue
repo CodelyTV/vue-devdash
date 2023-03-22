@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import styles from './GitHubRepositoryDetail.module.css'
 import { useGitHubRepositoryPullRequests } from './useGitHubRepositoryPullRequests'
 import type { RepositoryId } from '@/domain/GitHubRepository'
 import type { GitHubRepositoryPullRequestRepository } from '@/domain/GitHubRepositoryPullRequestRepository'
@@ -12,7 +11,7 @@ const { isLoading, pullRequests } = useGitHubRepositoryPullRequests(props.reposi
 
 <template>
   <h3>Pull requests</h3>
-  <table :class="styles.detail__table">
+  <table :class="$style.detail__table">
     <thead>
       <tr>
         <th>Title</th>
@@ -35,3 +34,5 @@ const { isLoading, pullRequests } = useGitHubRepositoryPullRequests(props.reposi
 
   <Loader v-if="isLoading" />
 </template>
+
+<style module src="./GithubRepositoryDetail.module.css" />

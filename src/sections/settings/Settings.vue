@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import type { FormEvent } from '../../domain/FormEvent'
-import styles from './Settings.module.css'
 import { useSaveSettings } from './useSaveSettings'
 import type { GitHubAccessTokenRepository } from '@/domain/GitHubAccessTokenRepository'
 
@@ -21,7 +20,7 @@ async function submitForm(event: Event) {
 </script>
 
 <template>
-  <section :class="styles.settings">
+  <section :class="$style.settings">
     <h2>Settings</h2>
     <p>
       ⚙️ Here you can configure your GitHub Access Token, so that <i>DevDash_</i> gets the data from the repositories.
@@ -37,7 +36,7 @@ async function submitForm(event: Event) {
       </a>
     </p>
 
-    <form :class="styles.form" @submit.prevent="submitForm">
+    <form :class="$style.form" @submit.prevent="submitForm">
       <label for="ghAccessToken">GitHub Access Token</label>
       <input id="ghAccessToken" name="ghAccessToken" type="text">
 
@@ -45,3 +44,5 @@ async function submitForm(event: Event) {
     </form>
   </section>
 </template>
+
+<style module src="./Settings.module.css" />
