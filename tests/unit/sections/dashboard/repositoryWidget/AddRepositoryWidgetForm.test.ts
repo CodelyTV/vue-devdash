@@ -2,7 +2,7 @@ import { describe, expect, test, vi } from 'vitest'
 import { mock } from 'vitest-mock-extended'
 import AddRepositoryWidgetForm from '@/sections/dashboard/repositoryWidget/AddRepositoryWidgetForm.vue'
 import type { RepositoryWidget } from '@/domain/RepositoryWidget'
-import { render, screen } from '~/tests'
+import { render, screen } from '~/tests/unit'
 import type { LocalStorageRepositoryWidgetRepository } from '@/infrastructure/LocalStorageRepositoryWidgetRepository'
 import { DomainEvents } from '@/domain/DomainEvents'
 
