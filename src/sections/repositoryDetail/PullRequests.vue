@@ -11,7 +11,7 @@ const { isLoading, pullRequests } = useGitHubRepositoryPullRequests(props.reposi
 
 <template>
   <h3>Pull requests</h3>
-  <table class="detail__table">
+  <table :class="$style.detail__table">
     <thead>
       <tr>
         <th>Title</th>
@@ -34,3 +34,5 @@ const { isLoading, pullRequests } = useGitHubRepositoryPullRequests(props.reposi
 
   <Loader v-if="isLoading" />
 </template>
+
+<style module src="./GithubRepositoryDetail.module.css" />
