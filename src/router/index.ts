@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
+import NProgress from 'nprogress'
 import Layout from '@/sections/layout/Layout.vue'
 import Dashboard from '@/sections/dashboard/Dashboard.vue'
 import { config } from '@/config'
@@ -38,6 +39,20 @@ const router = createRouter({
       ],
     },
   ],
+})
+
+router.beforeResolve((to, _from, next) => {
+  // If this isn't an initial page load.
+  if (to.name) {
+    // Start the route progress bar.
+    NProgress.start()
+  }
+  next()
+})
+
+router.afterEach(() => {
+  // Complete the animation of the route progress bar.
+  NProgress.done()
 })
 
 export default router

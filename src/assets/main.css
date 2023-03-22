@@ -1,8 +1,25 @@
 :root {
   --header-height: 6.25rem;
+  --color-brand: #3cff64;
 }
 
 body {
   margin: 0;
   font-family: sans-serif;
+}
+
+
+
+#nprogress .bar {
+  background: var(--color-brand);
+  height: 4px;
+}
+
+#nprogress .peg {
+  box-shadow: 0 0 10px var(--color-brand), 0 0 5px var(--color-brand);
+}
+
+#nprogress .spinner-icon {
+  border-top-color: var(--color-brand);
+  border-left-color: var(--color-brand);
 }
