@@ -1,15 +1,26 @@
 .header {
   height: var(--header-height);
   background-color: #1a2233;
+}
 
-  &__container {
-    display: flex;
-    gap: 2rem;
-    align-items: center;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 1rem;
-  }
+.header__container {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+.brand__container {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+}
+
+.brand__container a {
+  text-decoration: none;
 }
 
 .app__brand a {

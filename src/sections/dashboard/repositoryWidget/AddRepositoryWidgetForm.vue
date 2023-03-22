@@ -4,14 +4,11 @@ import styles from './AddRepositoryWidgetForm.module.css'
 import { useAddRepositoryWidget } from './useAddRepositoryWidget'
 import Add from '@/assets/icons/add.svg?component'
 import type { RepositoryWidgetRepository } from '@/domain/RepositoryWidgetRepository'
+import type { FormEvent } from '@/domain/FormEvent'
 
 interface FormData {
   id: string
   repositoryUrl: string
-}
-
-type FormEvent<T> = Event & {
-  target: { elements: { [key in keyof T]: { value: T[key]; checked: T[key] } } }
 }
 
 const props = defineProps<{ repository: RepositoryWidgetRepository }>()

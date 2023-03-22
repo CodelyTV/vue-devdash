@@ -3,13 +3,18 @@ import NProgress from 'nprogress'
 import { GitHubApiGitHubRepositoryPullRequestRepository } from '../infrastructure/GitHubApiGitHubRepositoryPullRequestRepository'
 import Layout from '@/sections/layout/Layout.vue'
 import Dashboard from '@/sections/dashboard/Dashboard.vue'
-import { config } from '@/config'
+import Settings from '@/sections/settings/Settings.vue'
 import { GitHubApiGitHubRepositoryRepository } from '@/infrastructure/GitHubApiGitHubRepositoryRepository'
 import { LocalStorageRepositoryWidgetRepository } from '@/infrastructure/LocalStorageRepositoryWidgetRepository'
+import { LocalStorageGitHubAccessTokenRepository } from '@/infrastructure/LocalStorageGithubAccessTokenRepository'
+import { useSearchGithubAccessToken } from '@/sections/settings/useSearchGithubAccessToken'
 
-const gitHubRepositoryRepository = new GitHubApiGitHubRepositoryRepository(config.github_access_token)
+const ghAccessTokenRepository = new LocalStorageGitHubAccessTokenRepository()
+const ghAccessTokenSearcher = useSearchGithubAccessToken(ghAccessTokenRepository)
+const ghAccessToken = ghAccessTokenSearcher.search()
+const gitHubRepositoryRepository = new GitHubApiGitHubRepositoryRepository(ghAccessToken)
 const repositoryWidgetRepository = new LocalStorageRepositoryWidgetRepository()
-const gitHubRepositoryPullRequestRepository = new GitHubApiGitHubRepositoryPullRequestRepository(config.github_access_token)
+const gitHubRepositoryPullRequestRepository = new GitHubApiGitHubRepositoryPullRequestRepository(ghAccessToken)
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -30,7 +35,7 @@ const router = createRouter({
           },
         },
         {
-          path: '/repository/:organization/:name',
+          path: 'repository/:organization/:name',
           name: 'repository',
           component: () => import('@/sections/repositoryDetail/GithubRepositoryDetail.vue'),
           props: (route) => {
@@ -42,9 +47,27 @@ const router = createRouter({
             }
           },
         },
+        {
+          path: 'settings',
+          component: Settings,
+          name: 'settings',
+          props: () => {
+            return {
+              repository: ghAccessTokenRepository,
+            }
+          },
+        },
       ],
     },
   ],
+})
+
+router.beforeEach((to) => {
+  if (to.name === 'settings')
+    return
+
+  if (!ghAccessToken)
+    return '/settings'
 })
 
 router.beforeResolve((to, _from, next) => {
