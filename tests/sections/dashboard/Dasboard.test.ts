@@ -31,6 +31,7 @@ describe('Dashboard section', () => {
 
   test('should show not results message when there are no widgets', async () => {
     mockRepository.search.mockResolvedValue([])
+    mockRepositoryWidget.search.mockResolvedValue([])
 
     render(Dashboard, {
       props: {

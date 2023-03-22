@@ -1,7 +1,7 @@
 import { type Ref, onBeforeMount, ref } from 'vue'
 import type { RepositoryWidget } from '@/domain/RepositoryWidget'
-import { config } from '@/config'
 import type { RepositoryWidgetRepository } from '@/domain/RepositoryWidgetRepository'
+import { config } from '@/config'
 
 const repositoryWidgets = ref<RepositoryWidget[]>([])
 
