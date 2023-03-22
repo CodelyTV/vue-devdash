@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import Skeleton from '@/shared/components/Skeleton.vue'
+import { Skeleton } from '@antoniogiroz/vue-skeleton'
 import PullRequests from '@/assets/icons/git-pull-request.svg?component'
 import IssueOpened from '@/assets/icons/issue-opened.svg?component'
 import Forks from '@/assets/icons/repo-forked.svg?component'

@@ -1,6 +1,6 @@
 <script setup lang="ts">
+import { SkeletonTheme } from '@antoniogiroz/vue-skeleton'
 import WidgetSkeleton from './RepositoryWidgetSkeleton.vue'
-import SkeletonTheme from '@/shared/components/SkeletonTheme.vue'
 
 const props = defineProps<{
   numberOfWidgets: number
