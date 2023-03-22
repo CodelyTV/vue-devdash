@@ -12,7 +12,7 @@
   }
 }
 
-.app__brand {
+.app__brand a {
   color: #3cff64;
   font-style: italic;
 }

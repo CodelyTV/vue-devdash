@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { RouterView } from 'vue-router'
+import { RouterLink, RouterView } from 'vue-router'
 import Logo from '../../assets/logo.svg?component'
 import styles from './Layout.module.css'
 import ErrorBoundary from '~/src/shared/components/ErrorBoundary.vue'
@@ -10,7 +10,9 @@ import ErrorBoundary from '~/src/shared/components/ErrorBoundary.vue'
     <section :class="styles.header__container">
       <Logo />
       <h1 :class="styles.app__brand">
-        DevDash_
+        <RouterLink to="/">
+          DevDash_
+        </RouterLink>
       </h1>
     </section>
   </header>
